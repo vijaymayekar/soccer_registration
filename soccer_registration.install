@@ -1,0 +1,175 @@
+<?php
+
+
+/**
+ * @file
+ * Install, update and uninstall functions for the soccer_registration module.
+ */
+
+/**
+ * Implements hook_schema().
+ *
+ * Defines the database tables used by this module.
+ *
+ * @see hook_schema()
+ *
+ * @ingroup soccer_registration
+ */
+function soccer_registration_schema() {
+  $schema['soccer_registration'] = array(
+    'description' => 'Stores example person entries for demonstration purposes.',
+    'fields' => array(
+      'srid' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary Key: Unique registration ID.',
+      ),
+      'first_name' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '',
+        'description' => 'First Name of the person.',
+      ),
+      'last_name' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '',
+        'description' => 'Last Name of the person.',
+      ),
+      'age' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'size' => 'tiny',
+        'description' => 'The age of the person in years.',
+      ),
+      'birth_date' => array(
+        'type' => 'int',
+        'default' => 0,
+        'description' => 'Birth date.',
+      ),
+      'school' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '',
+        'description' => 'School',
+      ),
+      'gender' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '',
+        'description' => 'Gender',
+      ),
+      'dominate_foot' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '',
+        'description' => 'Dominate Foot',
+      ),
+      'fav_color' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '',
+        'description' => 'Favorite Color',
+      ),
+      'home_address' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '',
+        'description' => 'Home Address',
+      ),
+      'city' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '',
+        'description' => 'City',
+      ),
+      'zip' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '',
+        'description' => 'Zip',
+      ),
+      'home_phone' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '',
+        'description' => 'Home Phone',
+      ),
+      'cell' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '',
+        'description' => 'Cell',
+      ),
+      'skill_level' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '',
+        'description' => 'Skill Level',
+      ),
+      'player_shirt_size' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '',
+        'description' => 'Player Shirt size',
+      ),
+      'parent_first_name' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '',
+        'description' => 'parent first name',
+      ),
+      'parent_last_name' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '',
+        'description' => 'parent last name',
+      ),
+      'parent_phone' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '',
+        'description' => 'parent phone',
+      ),
+      'parent_email' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '',
+        'description' => 'Parent EMail',
+      ),
+      'emergency_contact_name' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '',
+        'description' => 'emergency contact name',
+      ),
+      'emergency_contact_phone' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '',
+        'description' => 'emergency contact phone',
+      ),
+      'medical_concern' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '',
+        'description' => 'Medical Concern',
+      ),
+      'emergency_contact_comment' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '',
+        'description' => 'emergency contact comment',
+      ),
+      'created' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'The age of the person in years.',
+      ),
+    ),
+    'primary key' => array('srid'),
+  );
+  return $schema;
+}
