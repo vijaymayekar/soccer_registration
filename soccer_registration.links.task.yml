@@ -1,0 +1,4 @@
+soccer_registration.list:
+  title: Soccer Registration
+  route_name: soccer_registration.list
+  base_route: system.admin_content

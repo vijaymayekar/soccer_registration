@@ -5,3 +5,10 @@ soccer_registration.form:
    _form: '\Drupal\soccer_registration\Form\SoccerRegistrationForm'
  requirements:
    _permission: 'access content'
+soccer_registration.list:
+  path: 'admin/content/soccer_registration'
+  defaults:
+    _title: 'List'
+    _controller: '\Drupal\soccer_registration\Controller\***REMOVED***'
+  requirements:
+    _permission: 'access content'

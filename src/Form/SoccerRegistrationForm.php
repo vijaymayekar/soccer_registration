@@ -22,33 +22,34 @@ class SoccerRegistrationForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state)
   {
     $form['information'] = array(
-      '#type' => 'fieldset',
+      '#type' => 'details',
       '#title' => t('Information'),
+      '#open' => TRUE,
     );
     $form['information']['first_name'] = array(
       '#type' => 'textfield',
       '#title' => t('First Name'),
-      '#required' => TRUE,
+      //'#required' => TRUE,
     );
     $form['information']['last_name'] = array(
       '#type' => 'textfield',
       '#title' => t('Last Name'),
-      '#required' => TRUE,
+      //'#required' => TRUE,
     );
     $form['information']['age'] = array(
       '#type' => 'textfield',
       '#title' => t('Age'),
-      '#required' => TRUE,
+      //'#required' => TRUE,
     );
     $form['information']['birth_date'] = array(
       '#type' => 'textfield',
       '#title' => t('Birth Date'),
-      '#required' => TRUE,
+      //'#required' => TRUE,
     );
     $form['information']['school'] = array(
       '#type' => 'textfield',
       '#title' => t('School'),
-      '#required' => TRUE,
+      //'#required' => TRUE,
     );
     $form['information']['gender'] = array(
       '#type' => 'radios',
@@ -70,37 +71,37 @@ class SoccerRegistrationForm extends FormBase {
     $form['information']['fav_color'] = array(
       '#type' => 'textfield',
       '#title' => t('Favorite Color'),
-      '#required' => TRUE,
+      //'#required' => TRUE,
     );
     $form['information']['home_address'] = array(
       '#type' => 'textfield',
       '#title' => t('Home Address'),
-      '#required' => TRUE,
+      //'#required' => TRUE,
     );
     $form['information']['city'] = array(
       '#type' => 'textfield',
       '#title' => t('City'),
-      '#required' => TRUE,
+      //'#required' => TRUE,
     );
     $form['information']['zip'] = array(
       '#type' => 'textfield',
       '#title' => t('Zip'),
-      '#required' => TRUE,
+      //'#required' => TRUE,
     );
     $form['information']['home_phone'] = array(
       '#type' => 'textfield',
       '#title' => t('Home Phone'),
-      '#required' => TRUE,
+      //'#required' => TRUE,
     );
     $form['information']['cell'] = array(
       '#type' => 'textfield',
       '#title' => t('Cell'),
-      '#required' => TRUE,
+      //'#required' => TRUE,
     );
     $form['information']['other'] = array(
       '#type' => 'textfield',
       '#title' => t('Other'),
-      '#required' => TRUE,
+      //'#required' => TRUE,
     );
     $form['information']['skill_level'] = array(
       '#type' => 'select',
@@ -118,6 +119,66 @@ class SoccerRegistrationForm extends FormBase {
     );
 
 
+    $form['parent_information'] = array(
+      '#type' => 'details',
+      '#title' => t('Parent / Guardian Information'),
+      '#open' => FALSE,
+    );
+    $form['parent_information']['parent_first_name'] = array(
+      '#type' => 'textfield',
+      '#title' => t('First Name'),
+      //'#required' => TRUE,
+    );
+    $form['parent_information']['parent_last_name'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Last Name'),
+      //'#required' => TRUE,
+    );
+    $form['parent_information']['parent_phone'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Phone'),
+      //'#required' => TRUE,
+    );
+    $form['parent_information']['parent_email'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Email'),
+      //'#required' => TRUE,
+    );
+
+    $form['emergency_contact'] = array(
+      '#type' => 'details',
+      '#title' => t('Emergency Contact'),
+      '#open' => FALSE,
+    );
+    $form['emergency_contact']['emergency_contact_name'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Name'),
+      //'#required' => TRUE,
+    );
+    $form['emergency_contact']['emergency_contact_relationship'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Relationship'),
+      //'#required' => TRUE,
+    );
+    $form['emergency_contact']['emergency_contact_phone'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Phone'),
+      //'#required' => TRUE,
+    );
+    $form['emergency_contact']['medical_concern'] = array(
+      '#type' => 'radios',
+      '#title' => ('Any Medical Concern?'),
+      '#options' => array(
+        'no' => t('No'),
+        'yes' => t('Yes')
+      ),
+    );
+    $form['emergency_contact']['emergency_contact_comment'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Comment'),
+      //'#required' => TRUE,
+    );
+
     $form['actions']['#type'] = 'actions';
     $form['actions']['submit'] = array(
       '#type' => 'submit',
@@ -131,9 +192,51 @@ class SoccerRegistrationForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    // drupal_set_message($this->t('@can_name ,Your application is being submitted!', array('@can_name' => $form_state->getValue('candidate_name'))));
-    foreach ($form_state->getValues() as $key => $value) {
-      drupal_set_message($key . ': ' . $value);
+    $account = $this->currentUser();
+    // Save the submitted entry.
+    $entry = array(
+      'first_name',
+      'last_name',
+      'school',
+      'gender',
+      'dominate_foot',
+      'fav_color',
+      'home_address',
+      'city',
+      'zip',
+      'home_phone',
+      'cell',
+      'skill_level',
+      'player_shirt_size',
+      'parent_first_name',
+      'parent_last_name',
+      'parent_phone',
+      'parent_email',
+      'emergency_contact_name',
+      'emergency_contact_phone',
+      'medical_concern',
+      'emergency_contact_comment',
+    );
+    $int_fields = array('age', 'birth_date');
+
+    $data = array();
+    foreach ($entry as $key => $value) {
+      $data[$value] = $form_state->getValue($value);
     }
+
+    foreach ($int_fields as $key => $value) {
+      if ($form_state->getValue($value)) {
+        $data[$value] = $form_state->getValue($value);
+      }
+    }
+
+    $data['created'] = strtotime('now');
+    db_insert('soccer_registration')
+      ->fields($data)
+      ->execute();
+
+    $url = \Drupal\Core\Url::fromRoute('entity.node.canonical', ['node' => 1]);
+    return $form_state->setRedirectUrl($url);
+
   }
 }
