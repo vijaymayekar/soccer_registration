@@ -1,0 +1,7 @@
+soccer_registration.form:
+ path: '/soccer-registration'
+ defaults:
+   _title: 'Soccer Registration'
+   _form: '\Drupal\soccer_registration\Form\SoccerRegistrationForm'
+ requirements:
+   _permission: 'access content'
