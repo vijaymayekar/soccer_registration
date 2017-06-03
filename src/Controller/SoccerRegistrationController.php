@@ -12,7 +12,7 @@ class SoccerRegistrationController extends ControllerBase {
   /**
    * Render a list of entries in the database.
    */
-  public function list() {
+  public function listing() {
     $content = array();
 
     $content['message'] = array(

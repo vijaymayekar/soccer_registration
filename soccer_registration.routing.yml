@@ -9,6 +9,6 @@ soccer_registration.list:
   path: 'admin/content/soccer_registration'
   defaults:
     _title: 'List'
-    _controller: '\Drupal\soccer_registration\Controller\SoccerRegistrationController::list'
+    _controller: '\Drupal\soccer_registration\Controller\SoccerRegistrationController::listing'
   requirements:
     _permission: 'access content'
