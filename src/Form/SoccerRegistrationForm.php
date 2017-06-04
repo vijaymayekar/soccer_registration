@@ -42,7 +42,7 @@ class SoccerRegistrationForm extends FormBase {
       //'#required' => TRUE,
     );
     $form['information']['birth_date'] = array(
-      '#type' => 'textfield',
+      '#type' => 'date',
       '#title' => t('Birth Date'),
       //'#required' => TRUE,
     );
@@ -230,7 +230,14 @@ class SoccerRegistrationForm extends FormBase {
       }
     }
 
+
+
     $data['created'] = strtotime('now');
+    if ($birth_date = $form_state->getValue('birth_date')) {
+      $data['birth_date'] = strtotime($birth_date);
+    }
+
+
     db_insert('soccer_registration')
       ->fields($data)
       ->execute();

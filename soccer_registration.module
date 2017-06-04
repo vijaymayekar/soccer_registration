@@ -1,0 +1,108 @@
+<?php
+
+/**
+ * Implements hook_views_data()
+ *
+ */
+function soccer_registration_views_data() {
+  $data = array();
+  $data['soccer_registration'] = array();
+
+  $data['soccer_registration']['table'] = array();
+  $data['soccer_registration']['table']['group'] = t('Soccer Registration');
+  $data['soccer_registration']['table']['provider'] = 'soccer_registration';
+  $data['soccer_registration']['table']['base'] = array(
+    'field' => 'srid',
+    'title' => t('Soccer Registration'),
+    'help' => t('Soccer Registration data.'),
+    'weight' => -10,
+  );
+
+  $text_fields = array(
+    'first_name' => 'First Name',
+    'last_name' => 'Last Name',
+    'school' => 'School',
+    'gender' => 'Gender',
+    'dominate_foot' => 'Dominate Foot',
+    'fav_color' => 'Favorite Color',
+    'home_address' => 'Home Address',
+    'city' => 'City',
+    'zip' => 'Zip',
+    'home_phone' => 'Home Phone',
+    'cell' => 'Cell',
+    'skill_level' => 'Skill Level',
+    'player_shirt_size' => 'Player Shirt size',
+    'parent_first_name' => 'Parent first name',
+    'parent_last_name' => 'Parent last name',
+    'parent_phone' => 'Parent phone',
+    'parent_email' => 'Parent Email',
+    'emergency_contact_name' => 'Emergency contact name',
+    'emergency_contact_phone' => '***REMOVED***',
+    'medical_concern' => 'Medical Concern',
+    'emergency_contact_comment' => 'Emergency contact comment',
+  );
+
+  foreach ($text_fields as $key => $value) {
+    $data['soccer_registration'][$key] = array(
+      'title' => t($value),
+      'field' => array(
+        'id' => 'standard',
+      ),
+      'sort' => array(
+        'id' => 'standard',
+      ),
+      'filter' => array(
+        'id' => 'string',
+      ),
+      'argument' => array(
+        'id' => 'string',
+      ),
+    );
+  }
+  $date_fields = array(
+    'created' => 'Created on',
+    'birth_date' => 'Birth Date'
+  );
+
+  foreach ($date_fields as $key => $value) {
+    $data['soccer_registration'][$key] = array(
+      'title' => t($value),
+      'field' => array(
+        'id' => 'date',
+      ),
+      'sort' => array(
+        'id' => 'date',
+      ),
+      'filter' => array(
+        'id' => 'date',
+      ),
+    );
+  }
+
+  $data['soccer_registration']['age'] = array(
+    'title' => t('Age'),
+    'field' => array(
+      'id' => 'numeric',
+    ),
+    'sort' => array(
+      'id' => 'standard',
+    ),
+    'filter' => array(
+      'id' => 'numeric',
+    ),
+    'argument' => array(
+      'id' => 'numeric',
+    ),
+  );
+
+  return $data;
+}
+
+function soccer_registration_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  if ($form_id == 'views_exposed_form') {
+    if (isset($form['created']) && isset($form['created']['min'])) {
+      $form['created']['min']['#type'] = 'date';
+      $form['created']['max']['#type'] = 'date';
+    }
+  }
+}
