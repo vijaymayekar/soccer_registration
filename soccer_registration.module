@@ -37,7 +37,7 @@ function soccer_registration_views_data() {
     'parent_phone' => 'Parent phone',
     'parent_email' => 'Parent Email',
     'emergency_contact_name' => 'Emergency contact name',
-    'emergency_contact_phone' => '***REMOVED***',
+    'emergency_contact_phone' => 'Emergency contact phone',
     'medical_concern' => 'Medical Concern',
     'emergency_contact_comment' => 'Emergency contact comment',
   );

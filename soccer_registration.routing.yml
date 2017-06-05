@@ -5,10 +5,17 @@ soccer_registration.form:
    _form: '\Drupal\soccer_registration\Form\SoccerRegistrationForm'
  requirements:
    _permission: 'access content'
+soccer_registration.exportcsv:
+ path: '/admin/content/soccer-registration/csv'
+ defaults:
+   _title: 'Soccer Registration Export'
+   _controller: '\Drupal\soccer_registration\Controller\SoccerRegistrationController::exportcsv'
+ requirements:
+   _permission: 'access content'
 #soccer_registration.list:
 #  path: 'admin/content/soccer_registration'
 #  defaults:
 #    _title: 'List'
-#    _controller: '\Drupal\soccer_registration\Controller\***REMOVED***ing'
+#    _controller: '\Drupal\soccer_registration\Controller\SoccerRegistrationController::listing'
 #  requirements:
 #    _permission: 'access content'

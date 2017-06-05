@@ -1,0 +1,3 @@
+administer soccer registration:
+  title: Administer Soccer Registration
+  restrict access: true

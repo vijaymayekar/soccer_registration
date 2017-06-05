@@ -51,39 +51,25 @@ class SoccerRegistrationController extends ControllerBase {
   }
 
   /**
-   * Render a filtered list of entries in the database.
+   * Export data from database.
    */
-  public function entryAdvancedList() {
-    $content = array();
+  public function exportcsv() {
 
-    $content['message'] = array(
-      '#markup' => $this->t('A more complex list of entries in the database.') . ' ' .
-      $this->t('Only the entries with name = "John" and age older than 18 years are shown, the username of the person who created the entry is also shown.'),
-    );
-
-    $headers = array(
-      t('Id'),
-      t('Created by'),
-      t('Name'),
-      t('Surname'),
-      t('Age'),
-    );
-
-    $rows = array();
-    foreach ($entries = DbtngExampleStorage::advancedLoad() as $entry) {
-      // Sanitize each entry.
-      $rows[] = array_map('Drupal\Component\Utility\SafeMarkup::checkPlain', $entry);
-    }
-    $content['table'] = array(
-      '#type' => 'table',
-      '#header' => $headers,
-      '#rows' => $rows,
-      '#attributes' => array('id' => 'dbtng-example-advanced-list'),
-      '#empty' => t('No entries available.'),
-    );
-    // Don't cache this page.
-    $content['#cache']['max-age'] = 0;
-    return $content;
+//    header("Content-Type: text/csv");
+//    header("Content-Disposition: attachment; filename=file.csv");
+//
+//    function outputCSV($data) {
+//      $output = fopen("php://output", "w");
+//      foreach ($data as $row)
+//        fputcsv($output, $row); // here you can change delimiter/enclosure
+//      fclose($output);
+//    }
+//
+//    outputCSV(array(
+//      array("name 1", "age 1", "city 1"),
+//      array("name 2", "age 2", "city 2"),
+//      array("name 3", "age 3", "city 3")
+//    ));
   }
 
 }
